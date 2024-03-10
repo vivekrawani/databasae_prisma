@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-function getAllTodo() {
+function getAllUser() {
     return __awaiter(this, void 0, void 0, function* () {
         const res = yield prisma.todo.findMany({
             where: {}
@@ -19,4 +19,36 @@ function getAllTodo() {
         console.log(res);
     });
 }
-getAllTodo();
+function insertUser(user) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const res = yield prisma.user.create({
+                data: user
+            });
+            console.log(res);
+        }
+        catch (error) {
+            console.log("Something went wrong!");
+        }
+    });
+}
+function updateUser(email, updateData) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const res = yield prisma.user.update({
+            where: {
+                email: email
+            },
+            data: updateData
+        });
+        console.log(res);
+    });
+}
+function deleteUser(email) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const res = yield prisma.user.delete({
+            where: { email }
+        });
+        console.log(res);
+    });
+}
+deleteUser("s");
